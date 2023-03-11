@@ -17,8 +17,8 @@ pipeline {
 
     stage('Build image') {
       steps{
-        script {
-          dockerImage = docker.build app1
+         sh 'echo env='
+         sh 'docker build -t app1 .'
         }
       }
     }
