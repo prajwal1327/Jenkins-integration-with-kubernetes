@@ -25,6 +25,7 @@ pipeline {
          sh "docker login -u ${env.dockerHubUSER} -p ${env.dockerHubPassword}"
          sh 'docker tag app1 prajwal1327/app1'
          sh 'docker push prajwal1327/app1'
+         }
       }
     } 
   }
