@@ -24,22 +24,13 @@ pipeline {
 
     stage('Pushing Image') {
       steps {
-                sh "df -h"
-                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]){
-                    sh "docker login -u ${env.dockerHubUSER} -p ${env.dockerHubPassword}"
-                sh 'docker tag tomcat_build:${BUILD_VERSION} prajwal1327/app1'
-                sh 'docker push prajwal1327/app1'
+         sh "df -h"
+         withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]){
+         sh "docker login -u ${env.dockerHubUSER} -p ${env.dockerHubPassword}"
+         sh 'docker tag app1 prajwal1327/app1'
+         sh 'docker push prajwal1327/app1'
       }
-     } 
-      steps{
-        script {
-          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("latest")
-          }
-        }
-      }
-    }
-
+    } 
     stage('Deploying App to Kubernetes') {
       steps {
         script {
@@ -47,7 +38,6 @@ pipeline {
         }
       }
     }
-
   }
 
 }
