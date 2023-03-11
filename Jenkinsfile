@@ -19,7 +19,6 @@ pipeline {
       steps{
          sh 'echo env='
          sh 'docker build -t app1 .'
-        }
       }
     }
 
