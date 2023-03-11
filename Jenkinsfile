@@ -29,9 +29,8 @@ pipeline {
                     sh "docker login -u ${env.dockerHubUSER} -p ${env.dockerHubPassword}"
                 sh 'docker tag tomcat_build:${BUILD_VERSION} prajwal1327/app1'
                 sh 'docker push prajwal1327/app1'
-                }
-            }
-        } 
+      }
+     } 
       steps{
         script {
           docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
